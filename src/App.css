@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.batteryHealth{
+  color: #fff;
+  padding: '10px';
+  border-radius:50% ; 
+  display: inline-flex;
   align-items: center;
+  justify-content:center ;
+}
+.labelAlignment {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin-top: 5px;
 }
-
-.App-link {
-  color: #61dafb;
+.labelAlignment label
+ {
+  margin-right: 10px; 
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.labelAlignment Input
+ {
+  margin-right: 2px; 
+}
+.noticationBar {
+  position: absolute;
+  padding: 10px;
+  border: 1px solid gray;
+  background-color: #fff;
+  width: auto;
+  z-index: 1000; 
+  max-height: 200px; 
+  overflow-y: auto; 
+  width: inherit;
+}
+.fairHealth, .fairHealth:checked{
+  background-color: green;
+  border-color: green;
+}
+.goodHealth, .goodHealth:checked{
+ background-color: orange;
+ border-color: orange;
+}
+.poorHealth,.poorHealth:checked{
+background-color: red;
+border-color: red;
+}
+.bessTable{
+  margin-top: 15px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

@@ -1,23 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import BessInfo from "./components/BessInfo";
+import logo from "./Assets/logo.png"
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <img src={logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
+      <BessInfo />
     </div>
   );
 }
