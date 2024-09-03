@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Row, Col } from "react-bootstrap";
-import { Input, Button } from "reactstrap";
+
 import TableContent from "./TableContent";
 import { batteries } from "./DataTableConstants";
 import Pagination from "./Pagination";
@@ -28,22 +27,23 @@ export default function BessInfo() {
   useEffect(() => {
     let data = [...batteries];
 
-    if (searchKey !== "") {
-      data = batteries?.filter((item) =>
-        item?.name.toLowerCase().includes(searchKey.toLowerCase())
-      );
-    }
+
     if (sortByHealth !== "") {
-      data = data.filter(
+      data = batteries.filter(
         (item) =>
           item.health ===
           sortByHealth.charAt(0).toUpperCase() + sortByHealth.slice(1)
       );
     }
+    if (searchKey !== "") {
+      data = data?.filter((item) =>
+        item?.name.toLowerCase().includes(searchKey.toLowerCase())
+      );
+    }
     handlePaginateData(data);
   }, [searchKey, sortByHealth, handlePaginateData]);
   
-  // Function to update a random battery's health
+  // Function to update a random battery's health to trigger notifications.
   const updateRandomBatteryHealth = () => {
     const healthOptions = ["Poor", "Fair", "Good"];
     // let notificationList= [...notifications];
@@ -73,11 +73,11 @@ export default function BessInfo() {
 
 
   //Trigger the notifications
-  useEffect(() => {
-    const intervalId = setInterval(updateRandomBatteryHealth, 2000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(updateRandomBatteryHealth, 2000);
 
-    return () => clearInterval(intervalId);
-  }, [batteryList]);
+  //   return () => clearInterval(intervalId);
+  // }, [batteryList]);
 
 
   const handleClickNotifications = () => {
@@ -94,102 +94,112 @@ export default function BessInfo() {
     setSortByHealth("");
   };
 
-  return (
-    <>
-      <Row>
-        <Col md={4}>
-          <div className="labelAlignment">
-            <label>Search Users</label>
-            <Input
-              className="w-50"
-              type="text"
-              name="searchKey"
-              value={searchKey}
-              onChange={handleInputChange}
-              placeholder="Search batteries..."
+return (
+  <>
+    <div className="flex flex-wrap gap-4">
+      <div className="w-full md:w-1/3">
+        <div className="labelAlignment">
+          <label>Search Users</label>
+          <input
+            className="w-1/2 border rounded p-2"
+            type="text"
+            name="searchKey"
+            value={searchKey}
+            onChange={handleInputChange}
+            placeholder="Search batteries..."
+          />
+        </div>
+      </div>
+
+      <div className="w-full md:w-1/3">
+        <div className="flex justify-center items-center mt-1">
+          <label className="mr-1">Sort by Health</label>
+          <div>
+            <label className="mr-4">
+              <input
+                className="accent-green-500 mr-1"
+                type="radio"
+                checked={sortByHealth === "fair"}
+                name="sortByHealth"
+                value="fair"
+                onChange={handleSelectCheckbox}
+              />
+              Fair
+            </label>
+            <label className="mr-4">
+              <input
+                className="accent-orange-500 mr-1"
+                type="radio"
+                checked={sortByHealth === "good"}
+                name="sortByHealth"
+                value="good"
+                onChange={handleSelectCheckbox}
+              />
+              Good
+            </label>
+            <label>
+              <input
+                className="accent-red-500 mr-1"
+                type="radio"
+                checked={sortByHealth === "poor"}
+                name="sortByHealth"
+                value="poor"
+                onChange={handleSelectCheckbox}
+              />
+              Poor
+            </label>
+            {sortByHealth !== "" && (
+              <button
+                className="ml-4 bg-gray-500 text-white rounded p-1"
+                onClick={handleResetSelection}
+              >
+                Reset
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full md:w-1/4">
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={handleClickNotifications}
+          className="labelAlignment"
+        >
+          <i title="Notifications" className="material-icons float-right">
+            notifications_active
+          </i>
+          {notifications.length>0 && <label>
+            <b>{notifications.length }</b>
+          </label>
+          }
+        </div>
+        {isOpenNotification && notifications.length > 0 && (
+          <div className="notificationBar bg-gray-100 p-4 rounded">
+            {notifications.map((notification, key) => (
+              <p key={key}>{notification}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div className="flex justify-center mt-6">
+      <div className="w-full md:w-11/12">
+        <TableContent batteryList={batteryList} />
+        {batteryList.length > 0 && (
+          <div className="mt-6">
+            <Pagination
+              length={batteries.length}
+              postsPerPage={postsPerPage}
+              currentPage={currentPage}
+              handlePagination={handlePagination}
             />
           </div>
-        </Col>
-        <Col md={4}>
-          <div className="labelAlignment">
-            <label>Sort by Health</label>
-            <div>
-              <label>
-                <Input
-                  className="fairHealth"
-                  type="radio"
-                  checked={sortByHealth === "fair"}
-                  name="sortByHealth"
-                  value="fair"
-                  onChange={handleSelectCheckbox}
-                ></Input>
-                Fair
-              </label>
-              <label>
-                <Input
-                  className="goodHealth"
-                  type="radio"
-                  checked={sortByHealth === "good"}
-                  name="sortByHealth"
-                  value="good"
-                  onChange={handleSelectCheckbox}
-                ></Input>
-                Good
-              </label>
-              <label>
-                <Input
-                  className="poorHealth"
-                  type="radio"
-                  checked={sortByHealth === "poor"}
-                  name="sortByHealth"
-                  value="poor"
-                  onChange={handleSelectCheckbox}
-                ></Input>
-                Poor
-              </label>
-              <Button onClick={handleResetSelection}>Reset</Button>
-            </div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={handleClickNotifications}
-            className="labelAlignment"
-          >
-            <i title="Notifications" className="material-icons float-end">
-              notifications_active
-            </i>
-            <label>
-              <b>{notifications.length}</b>
-            </label>
-          </div>
-          {isOpenNotification && notifications.length > 0 && (
-            <div className="noticationBar">
-              {notifications.map((notification, key) => (
-                <p key={key}>{notification}</p>
-              ))}
-            </div>
-          )}
-        </Col>
-      </Row>
-      <Row className="justify-content-center mt-3">
-        <Col md={11}>
-          <TableContent batteryList={batteryList} />
-          {batteryList.length > 0 && (
-            <Row>
-              <Col md={12} col-sm={12}>
-                <Pagination
-                  length={batteries.length}
-                  postsPerPage={postsPerPage}
-                  currentPage={currentPage}
-                  handlePagination={handlePagination}
-                />
-              </Col>
-            </Row>
-          )}
-        </Col>
-      </Row>
-    </>
-  );
+        )}
+      </div>
+    </div>
+  </>
+);
+
 }

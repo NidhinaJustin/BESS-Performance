@@ -1,12 +1,14 @@
-.batteryHealth{
+
+
+/* .batteryHealth{
   color: #fff;
   padding: '10px';
   border-radius:50% ; 
   display: inline-flex;
   align-items: center;
   justify-content:center ;
-}
-.labelAlignment {
+} */
+/* .labelAlignment {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +21,7 @@
 .labelAlignment Input
  {
   margin-right: 2px; 
-}
+} */
 .noticationBar {
   position: absolute;
   padding: 10px;
@@ -31,8 +33,8 @@
   overflow-y: auto; 
   width: inherit;
 }
-.fairHealth, .fairHealth:checked{
-  background-color: green;
+.fairHealth, .fairHealth{
+  background-color: green !important;
   border-color: green;
 }
 .goodHealth, .goodHealth:checked{

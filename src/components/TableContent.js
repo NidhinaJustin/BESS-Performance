@@ -1,45 +1,52 @@
 import React from "react";
-import { Table } from "react-bootstrap";
 
-export default function TableContent({batteryList}) {
-
+export default function TableContent({ batteryList }) {
   const getColor = (health) => {
     switch (health) {
       case "Fair":
-        return "green";
+        return "text-green-500"; 
       case "Good":
-        return "orange";
+        return "text-orange-500"; 
       case "Poor":
-        return "red";
+        return "text-red-500"; 
       default:
-        return "green"; 
+        return "text-green-500";
     }
   };
-  return (
-        <Table  striped bordered hover>
-          <thead>
-          <tr>
-          <th>health</th>
-          <th>Battery Name</th>
-          <th>current</th>
-          <th>temperature</th>
-          <th>power (°C)</th>
-          <th>status</th>
-        </tr>
-          </thead>
-          <tbody>
-            {batteryList?.map((item, index) => (
-              <tr key={index}>
-               <td><i title={item.health} style={{backgroundColor:getColor(item.health)}} className="material-icons batteryHealth">arrow_circle_up</i> </td>
-               <td> {item.name} </td>
-               <td> {item.current} </td>
-               <td> {item.temperature} </td>
-               <td> {item.power} </td>
-               <td> {item.status} </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
 
+  return (
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="py-2 px-4 border-b">Health</th>
+            <th className="py-2 px-4 border-b">Battery Name</th>
+            <th className="py-2 px-4 border-b">Current</th>
+            <th className="py-2 px-4 border-b">Temperature</th>
+            <th className="py-2 px-4 border-b">Power (°C)</th>
+            <th className="py-2 px-4 border-b">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {batteryList?.map((item, index) => (
+            <tr key={index} className="hover:bg-gray-50">
+              <td className="py-2 px-4 border-b text-center">
+                <i
+                  title={item.health}
+                  className={`material-icons p-2 ${getColor(item.health)}`}
+                >
+                  arrow_circle_up
+                </i>
+              </td>
+              <td className="py-2 px-4 border-b">{item.name}</td>
+              <td className="py-2 px-4 border-b">{item.current}</td>
+              <td className="py-2 px-4 border-b">{item.temperature}</td>
+              <td className="py-2 px-4 border-b">{item.power}</td>
+              <td className="py-2 px-4 border-b">{item.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
