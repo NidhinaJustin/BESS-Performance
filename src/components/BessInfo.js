@@ -155,26 +155,25 @@ return (
       </div>
 
       <div className="w-full md:w-1/4">
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={handleClickNotifications}
-          className="labelAlignment"
-        >
-          <i title="Notifications" className="material-icons float-right">
-            notifications_active
-          </i>
-          {notifications.length>0 && <label>
-            <b>{notifications.length }</b>
-          </label>
-          }
-        </div>
-        {isOpenNotification && notifications.length > 0 && (
-          <div className="notificationBar bg-gray-100 p-4 rounded">
-            {notifications.map((notification, key) => (
-              <p key={key}>{notification}</p>
-            ))}
+      <div
+            style={{ cursor: "pointer" }}
+            onClick={handleClickNotifications}
+            className="labelAlignment"
+          >
+            <i title="Notifications" className="material-icons float-end">
+              notifications_active
+            </i>
+            <label>
+              <b>{notifications.length}</b>
+            </label>
           </div>
-        )}
+          {isOpenNotification && notifications.length > 0 && (
+            <div className="noticationBar">
+              {notifications.map((notification, key) => (
+                <p className="pb-2 border-b" key={key}>{notification}</p>
+              ))}
+            </div>
+          )}
       </div>
     </div>
 
