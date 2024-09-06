@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/BESS-Performance/static/css/main.204d61d3.css",
-    "main.js": "/BESS-Performance/static/js/main.2747ef6f.js",
+    "main.css": "/BESS-Performance/static/css/main.1557ebac.css",
+    "main.js": "/BESS-Performance/static/js/main.612af036.js",
     "static/js/453.0ac804fd.chunk.js": "/BESS-Performance/static/js/453.0ac804fd.chunk.js",
     "static/media/logo.png": "/BESS-Performance/static/media/logo.005cd9b0b565d0392804.png",
     "index.html": "/BESS-Performance/index.html",
-    "main.204d61d3.css.map": "/BESS-Performance/static/css/main.204d61d3.css.map",
-    "main.2747ef6f.js.map": "/BESS-Performance/static/js/main.2747ef6f.js.map",
+    "main.1557ebac.css.map": "/BESS-Performance/static/css/main.1557ebac.css.map",
+    "main.612af036.js.map": "/BESS-Performance/static/js/main.612af036.js.map",
     "453.0ac804fd.chunk.js.map": "/BESS-Performance/static/js/453.0ac804fd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.204d61d3.css",
-    "static/js/main.2747ef6f.js"
+    "static/css/main.1557ebac.css",
+    "static/js/main.612af036.js"
   ]
 }
