@@ -1,3 +1,17 @@
+.labelAlignment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+.labelAlignment label
+ {
+  margin-right: 10px; 
+}
+.labelAlignment Input
+ {
+  margin-right: 2px; 
+}
 .noticationBar {
   position: absolute;
   padding: 10px;
