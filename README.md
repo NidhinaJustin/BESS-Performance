@@ -1,5 +1,5 @@
 # Real time montitoring system
-## eal-time monitoring system to track the status and performance of BESS installations built with React.js.
+## Real-time monitoring system to track the status and performance of BESS installations built with React.js.
 
 ### Features:
 * Users can search and sort batteries by health.
