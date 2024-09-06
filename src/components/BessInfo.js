@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-
 import TableContent from "./TableContent";
 import { batteries } from "./DataTableConstants";
 import Pagination from "./Pagination";
@@ -46,7 +45,6 @@ export default function BessInfo() {
   // Function to update a random battery's health to trigger notifications.
   const updateRandomBatteryHealth = () => {
     const healthOptions = ["Poor", "Fair", "Good"];
-    // let notificationList= [...notifications];
     const updatedBatteries = [...batteryList];
 
     const randomIndex = Math.floor(Math.random() * updatedBatteries.length);
@@ -60,10 +58,6 @@ export default function BessInfo() {
       ...updatedBatteries[randomIndex],
       health: randomHealth,
     };
-    // notificationList.push(newNotification);
-    // console.log(notificationList);
-
-    // setNotifications(notificationList);
     setNotifications((prevNotifications) => [
       ...prevNotifications,
       newNotification,
@@ -72,12 +66,12 @@ export default function BessInfo() {
   };
 
 
-  //Trigger the notifications
-  // useEffect(() => {
-  //   const intervalId = setInterval(updateRandomBatteryHealth, 2000);
+  // Trigger the notifications
+  useEffect(() => {
+    const intervalId = setInterval(updateRandomBatteryHealth, 3000);
 
-  //   return () => clearInterval(intervalId);
-  // }, [batteryList]);
+    return () => clearInterval(intervalId);
+  }, [batteryList]);
 
 
   const handleClickNotifications = () => {
@@ -96,12 +90,12 @@ export default function BessInfo() {
 
 return (
   <>
-    <div className="flex flex-wrap gap-4">
+    <div className="center-container">
       <div className="w-full md:w-1/3">
         <div className="labelAlignment">
-          <label>Search Users</label>
+          <label>Search users</label>
           <input
-            className="w-1/2 border rounded p-2"
+            className="w-1/2 border rounded p-2 ml-2"
             type="text"
             name="searchKey"
             value={searchKey}
@@ -113,7 +107,7 @@ return (
 
       <div className="w-full md:w-1/3">
         <div className="flex justify-center items-center mt-1">
-          <label className="mr-1">Sort by Health</label>
+          <label className="mr-1">Sort by health :</label>
           <div>
             <label className="mr-4">
               <input
