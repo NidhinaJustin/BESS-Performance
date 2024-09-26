@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
-import { Link,useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [userInfo , setUserInfo] =useState({
-    email:"",
-    password:""
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
   });
-  const navigate= useNavigate();
+  const [errorLoggingIn, setErrorLoggingIn] = useState("");
+  const navigate = useNavigate();
 
-  const handleInputChange=(e)=>{
+  const handleInputChange = (e) => {
     let userDetails = { ...userInfo, [e.target.name]: e.target.value };
     setUserInfo(userDetails);
-  }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const loggedUser=JSON.parse(localStorage.getItem("user"));
-    if(userInfo.email=== loggedUser.email && userInfo.password=== loggedUser.password){
-      navigate("/batteryList")
+    const loggedUser = JSON.parse(localStorage.getItem("user"));
+    if (loggedUser?.email && loggedUser?.password &&
+      userInfo.email === loggedUser?.email &&
+      userInfo.password === loggedUser?.password
+    ) {
+      localStorage.setItem("isLoggedIn", true);
+      navigate("/batteryList");
+    } else {
+      setErrorLoggingIn("wrong email or password");
     }
-    else{
-      alert("wrong email or password")
-    }
-    
   };
 
   return (
@@ -30,7 +33,10 @@ const LoginForm = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email address
             </label>
             <input
@@ -45,7 +51,10 @@ const LoginForm = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -68,7 +77,7 @@ const LoginForm = () => {
             </button>
           </div>
         </form>
-
+        <p className="text-red-500 my-2 text-center">{errorLoggingIn}</p>
         <p className="mt-6 text-center text-gray-500 text-sm">
           Don’t have an account?
           <Link className="text-stone-700 font-medium mx-2" to="/register">
